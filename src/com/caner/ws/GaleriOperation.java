@@ -18,7 +18,6 @@ public class GaleriOperation {
 		ConnectionDatabase connectionDatabase = new ConnectionDatabase();
 		getConnect = connectionDatabase.getConnection("Ogrenci_db", "root", "");
 		try {
-			System.out.println("insert block");
 			String sqlInsert = "INSERT INTO galeri(carName,carModel,carColour) VALUES(?,?,?)";
 			PreparedStatement statement = getConnect.prepareStatement(sqlInsert);
 			statement.setString(1, galeriEntity.getCarName());
@@ -32,7 +31,6 @@ public class GaleriOperation {
 		} finally {
 			getConnect.close();
 		}
-
 	}
 
 	public JsonArray selectDatabase() throws Throwable {
@@ -40,6 +38,7 @@ public class GaleriOperation {
 		ConnectionDatabase connectionDatabase = new ConnectionDatabase();
 		getConnect = connectionDatabase.getConnection("Ogrenci_db", "root", "");
 		try {
+			System.out.println("Select Block");
 			String sqlSelect = "SELECT * FROM galeri";
 			preparedStatement = getConnect.prepareStatement(sqlSelect);
 			ResultSet resultSet = preparedStatement.executeQuery();
@@ -71,7 +70,6 @@ public class GaleriOperation {
 		getConnect = connectionDatabase.getConnection("Ogrenci_db", "root", "");
 
 		try {
-			System.out.println("update block");
 			String sqlUpdate = "UPDATE galeri " + "SET carName = ?, carModel = ?, carColour = ? " + "WHERE carId = ?";
 			preparedStatement = getConnect.prepareStatement(sqlUpdate);
 			preparedStatement.setString(1, galeriEntity.getCarName());
@@ -79,8 +77,8 @@ public class GaleriOperation {
 			preparedStatement.setString(3, galeriEntity.getCarColour());
 			preparedStatement.setInt(4, galeriEntity.getCarId());
 			preparedStatement.executeUpdate();
-			
-				System.out.println("Update Succesfully");
+
+			System.out.println("Update Succesfully");
 		} catch (Exception e) {
 			System.err.println("Update ERROR : " + e);
 		} finally {
