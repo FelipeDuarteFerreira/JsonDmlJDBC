@@ -38,13 +38,11 @@ public class GaleriOperation {
 		ConnectionDatabase connectionDatabase = new ConnectionDatabase();
 		getConnect = connectionDatabase.getConnection("Ogrenci_db", "root", "");
 		try {
-			System.out.println("Select Block");
 			String sqlSelect = "SELECT * FROM galeri";
 			preparedStatement = getConnect.prepareStatement(sqlSelect);
 			ResultSet resultSet = preparedStatement.executeQuery();
 			JsonArray jsonArray = new JsonArray();
 			while (resultSet.next()) {
-
 				JsonObject jsonObject = new JsonObject();
 				jsonObject.addProperty("carId", resultSet.getInt("carId"));
 				jsonObject.addProperty("carName", resultSet.getString("carName"));
@@ -53,7 +51,7 @@ public class GaleriOperation {
 				jsonArray.add(jsonObject);
 			}
 
-			System.out.println("Array type : " + jsonArray);
+			System.out.println("array type : " + jsonArray);
 			return jsonArray;
 
 		} catch (Exception e) {
@@ -77,8 +75,6 @@ public class GaleriOperation {
 			preparedStatement.setString(3, galeriEntity.getCarColour());
 			preparedStatement.setInt(4, galeriEntity.getCarId());
 			preparedStatement.executeUpdate();
-
-			System.out.println("Update Succesfully");
 		} catch (Exception e) {
 			System.err.println("Update ERROR : " + e);
 		} finally {
